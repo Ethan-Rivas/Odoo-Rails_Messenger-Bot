@@ -1,0 +1,18 @@
+development:
+  url: http://localhost:8069/xmlrpc         #the OpenERP XML/RPC server
+  database: codigojade                      #the OpenERP database you want to connect to
+  username: admin
+  password: codigojade
+  models: ['res.partner', 'res.users', 'bot.messenger', 'bot.messenger.contact']
+  global_context:
+    'lang': en_US
+  bootstrap: true
+test:
+  url: http://localhost:8069/xmlrpc         #the OpenERP XML/RPC server
+  database: codigojade                      #the OpenERP database you want to connect to
+  username: admin
+  password: codigojade
+  models: ['res.partner', 'res.users', 'bot.messenger', 'bot.messenger.contact']
+  global_context:
+    'lang': en_US
+  bootstrap: true
