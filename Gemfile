@@ -33,6 +33,7 @@ group :doc do
 end
 
 gem 'ooor', :git => 'git://github.com/Ethan-Rivas/ooor'
+gem 'messenger-ruby'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
