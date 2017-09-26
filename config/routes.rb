@@ -1,4 +1,12 @@
 BotMsngr::Application.routes.draw do
+
+  resources :bot_messenger
+
+  mount Messenger::Engine, at: "/messenger"
+
+  post '/messenger/send_messages', to: 'messenger#send_messages', as: 'messenger/send_messages'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -39,7 +47,7 @@ BotMsngr::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
