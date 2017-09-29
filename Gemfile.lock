@@ -69,6 +69,7 @@ GEM
     multi_json (1.12.2)
     multipart-post (2.0.0)
     netrc (0.11.0)
+    pg (0.21.0)
     polyglot (0.3.5)
     rack (1.5.5)
     rack-test (0.6.3)
@@ -136,6 +137,7 @@ DEPENDENCIES
   jquery-rails
   messenger-ruby
   ooor!
+  pg
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc
