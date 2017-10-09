@@ -2,10 +2,14 @@ class MessengerController < Messenger::MessengerController
   def webhook
     fb_params.entries.each do |entry|
       entry.messagings.each do |messaging|
+        bot_id = BotMessenger.search([['page_id','ilike',messaging.recipient_id]], 0, 2)[0]
+        Messenger.config.page_access_token = BotMessenger.find(bot_id).page_token
+
         if messaging.callback.message?
           user = Messenger::Client.get_user_profile(messaging.sender_id) #=> hash with name, surname and profile picture
+          odoo_user_id = BotMessengerContact.search([['identifier', 'ilike', messaging.sender_id]], 0, 2)
 
-          if BotMessengerContact.search([['identifier', 'ilike', messaging.sender_id]], 0, 2).count >= 1
+          if odoo_user_id.count >= 1
             Messenger::Client.send(
               Messenger::Request.new(
                 Messenger::Elements::Text.new(text: "Your ID on the system is already registered."),
@@ -13,7 +17,7 @@ class MessengerController < Messenger::MessengerController
               )
             )
           else
-            messenger_contact = BotMessengerContact.create!({"name": user["first_name"] + " " + user["last_name"], "identifier": user["id"]})
+            messenger_contact = BotMessengerContact.create!({"name": user["first_name"] + " " + user["last_name"], "identifier": user["id"], "bot_id": bot_id})
 
             Messenger::Client.send(
               Messenger::Request.new(
